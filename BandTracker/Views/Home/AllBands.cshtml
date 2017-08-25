@@ -1,0 +1,12 @@
+<div class="jumbotron">
+  <h1>List of Bands</h1>
+</div>
+
+<div class="well">
+  @foreach (var band in @Model)
+  {
+    <li><a href="/bands/@band.GetId()">@band.GetName()</a></li>
+  }
+</div>
+
+<a href="/bands/bandForm"><button class="btn">Add Band</button></a>

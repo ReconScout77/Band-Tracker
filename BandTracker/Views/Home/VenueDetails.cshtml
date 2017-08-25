@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <h1>@Model["venue"].GetName()</h1>
+</div>
+
+<h2>@Model["venue"].GetName() has had the honor of hosting:</h2>
+<div class="well">
+  @foreach (var band in @Model["bands"])
+  {
+    <li><a href="/bands/@band.GetId()">@band.GetName()</a></li>
+  }
+</div>
+
+<a href='/bands/@Model["venue"].GetId()/addBand'><button class="btn btn-info">Add a band to this list</button></a>
+<a href='/venues/@Model["venue"].GetId()/updateForm'><button class="btn btn-warning">Update venue name</button></a>
+<a href='/venues/@Model["venue"].GetId()/deleted'><button class="btn btn-danger">Delete venue</button></a>
