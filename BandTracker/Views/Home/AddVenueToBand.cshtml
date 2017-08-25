@@ -6,6 +6,6 @@
 <div class="well">
   @foreach (var venue in @Model["venues"])
   {
-    <li><a href='/bands/@Model["band"].GetId()/addVenue/added-venue.GetId()'>@venue.GetName()</a></li>
+    <li><a href='/bands/@Model["band"].GetId()/addVenue/added-@venue.GetId()'>@venue.GetName()</a></li>
   }
 </div>

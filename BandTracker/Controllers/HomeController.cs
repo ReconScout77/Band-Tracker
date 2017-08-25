@@ -61,6 +61,28 @@ namespace BandTracker.Controllers
       return RedirectToAction("BandDetails");
     }
 
+    [HttpGet("/bands/{id}/updateForm")]
+    public ActionResult BandUpdateForm(int id)
+    {
+      Band thisBand = Band.Find(id);
+      return View(thisBand);
+    }
+
+    [HttpPost("/bands/{id}/updateForm/updated")]
+    public ActionResult UpdateBand(int id)
+    {
+      Band thisBand = Band.Find(id);
+      thisBand.Update(Request.Form["updateName"]);
+      return RedirectToAction("BandDetails");
+    }
+
+    [HttpGet("/bands/{id}/deleted")]
+    public ActionResult DeleteBand(int id)
+    {
+      Band.Find(id).Delete();
+      return RedirectToAction("AllBands");
+    }
+
     [HttpGet("/venues")]
     public ActionResult AllVenues()
     {
