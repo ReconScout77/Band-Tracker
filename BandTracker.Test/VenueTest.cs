@@ -10,6 +10,7 @@ namespace BandTracker.Tests
   {
     public void Dispose()
     {
+      Band.DeleteAll();
       Venue.DeleteAll();
     }
 
@@ -72,5 +73,44 @@ namespace BandTracker.Tests
       Assert.AreEqual(testVenue, result);
     }
 
+    [TestMethod]
+    public void AddBand_AddsBandToVenue_BandList()
+    {
+      Venue testVenue = new Venue("BandCon");
+      testVenue.Save();
+
+      Band testBand = new Band("Kalafina");
+      testBand.Save();
+
+      Band testBand2 = new Band("Fhana");
+      testBand2.Save();
+
+      testVenue.AddBand(testBand);
+      testVenue.AddBand(testBand2);
+
+      List<Band> result = testVenue.GetBands();
+      List<Band> expected = new List<Band>{testBand, testBand2};
+
+      CollectionAssert.AreEqual(expected, result);
+    }
+
+    [TestMethod]
+    public void GetBands_ReturnsAllBandsForVenue_BandList()
+    {
+      Venue testVenue = new Venue("Hello Arena");
+      testVenue.Save();
+
+      Band testBand1 = new Band("Owl City");
+      testBand1.Save();
+
+      Band testBand2 = new Band("BOOM BOOM Satellites");
+      testBand2.Save();
+
+      testVenue.AddBand(testBand1);
+      List<Band> result = testVenue.GetBands();
+      List<Band> expected = new List<Band> {testBand1};
+
+      CollectionAssert.AreEqual(expected, result);
+    }
   }
 }
