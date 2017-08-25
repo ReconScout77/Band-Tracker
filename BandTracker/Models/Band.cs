@@ -63,6 +63,7 @@ namespace BandTracker.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
+
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO bands(name) VALUES(@name);";
 
@@ -103,6 +104,39 @@ namespace BandTracker.Models
         conn.Dispose();
       }
       return allBands;
+    }
+
+    public static Band Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM bands WHERE id = @thisId";
+
+      MySqlParameter idParameter = new MySqlParameter();
+      idParameter.ParameterName = "@thisId";
+      idParameter.Value = id;
+      cmd.Parameters.Add(idParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      int bandId = 0;
+      string name = "";
+
+      while(rdr.Read())
+      {
+        bandId = rdr.GetInt32(0);
+        name = rdr.GetString(1);
+      }
+      Band foundBand = new Band(name, bandId);
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundBand;
     }
   }
 }

@@ -50,18 +50,26 @@ namespace BandTracker.Tests
     [TestMethod]
     public void Save_AssignsIdToObject_id()
     {
-      //Arrange
       Band testBand = new Band("Rocky Chack");
       testBand.Save();
 
-      //Act
       Band savedBand = Band.GetAll()[0];
 
       int result = savedBand.GetId();
       int testId = testBand.GetId();
 
-      //Assert
       Assert.AreEqual(testId, result);
+    }
+
+    [TestMethod]
+    public void Find_FindsBandInDatabase_Band()
+    {
+      Band testBand = new Band("Sentimental Bus");
+      testBand.Save();
+
+      Band result = Band.Find(testBand.GetId());
+
+      Assert.AreEqual(testBand, result);
     }
   }
 }

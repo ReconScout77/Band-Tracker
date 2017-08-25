@@ -50,18 +50,27 @@ namespace BandTracker.Tests
     [TestMethod]
     public void Save_AssignsIdToObject_id()
     {
-      //Arrange
       Venue testVenue = new Venue("Venue 4");
       testVenue.Save();
 
-      //Act
       Venue savedVenue = Venue.GetAll()[0];
 
       int result = savedVenue.GetId();
       int testId = testVenue.GetId();
 
-      //Assert
       Assert.AreEqual(testId, result);
     }
+
+    [TestMethod]
+    public void Find_FindsVenueInDatabase_Venue()
+    {
+      Venue testVenue = new Venue("My House");
+      testVenue.Save();
+
+      Venue result = Venue.Find(testVenue.GetId());
+
+      Assert.AreEqual(testVenue, result);
+    }
+
   }
 }
