@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <h1>@Model["venue"].GetName()</h1>
+</div>
+
+<h2>Select a band that has played at @Model["venue"].GetName():</h2>
+<div class="well">
+  @foreach (var band in @Model["bands"])
+  {
+    <li><a href='/venues/@Model["venue"].GetId()/addBand/added-@band.GetId()'>@band.GetName()</a></li>
+  }
+</div>
