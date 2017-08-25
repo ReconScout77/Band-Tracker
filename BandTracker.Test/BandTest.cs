@@ -128,5 +128,19 @@ namespace BandTracker.Tests
 
       CollectionAssert.AreEqual(testBandList, resultBandList);
     }
+
+    [TestMethod]
+    public void Update_UpdatesBandName_Band()
+    {
+      Band testBand = new Band("Machcco");
+      testBand.Save();
+
+      testBand.Update("Machico");
+      Band expected = new Band("Machico", testBand.GetId());
+
+      Band actual = Band.Find(testBand.GetId());
+
+      Assert.AreEqual(expected, actual);
+    }
   }
 }

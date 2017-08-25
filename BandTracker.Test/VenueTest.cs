@@ -128,5 +128,19 @@ namespace BandTracker.Tests
 
       CollectionAssert.AreEqual(testVenueList, resultVenueList);
     }
+
+    [TestMethod]
+    public void Update_UpdatesVenueName_Venue()
+    {
+      Venue testVenue = new Venue("Kye Arnena");
+      testVenue.Save();
+
+      testVenue.Update("Key Arena");
+      Venue expected = new Venue("Key Arena", testVenue.GetId());
+
+      Venue actual = Venue.Find(testVenue.GetId());
+      
+      Assert.AreEqual(expected, actual);
+    }
   }
 }
