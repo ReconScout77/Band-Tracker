@@ -112,5 +112,21 @@ namespace BandTracker.Tests
 
       CollectionAssert.AreEqual(expected, result);
     }
+
+    [TestMethod]
+    public void Delete_DeletesBandFromDatabase_BandList()
+    {
+      Band testBand1 = new Band("Throwaway");
+      testBand1.Save();
+
+      Band testBand2 = new Band("Lost Prophets");
+      testBand2.Save();
+
+      testBand1.Delete();
+      List<Band> resultBandList = Band.GetAll();
+      List<Band> testBandList = new List<Band> {testBand2};
+
+      CollectionAssert.AreEqual(testBandList, resultBandList);
+    }
   }
 }
